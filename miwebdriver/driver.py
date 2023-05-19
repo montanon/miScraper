@@ -1,9 +1,9 @@
 from seleniumrequests import Chrome
 from selenium import webdriver
 
-from driver_finders import *
-from driver_waiters import *
-from driver_checkers import *
+from .driver_finders import *
+from .driver_waiters import *
+from .driver_checkers import *
 
 
 CHROME_DRIVER = '~/WebBrowser_Drivers/chromedriver'
