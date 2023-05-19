@@ -102,11 +102,11 @@ class DriverHandler:
         self.driver.switch_to.window(self.driver.window_handles[0])
 
     @staticmethod
-    def click_element(element):
+    def click(element):
         element.click()
 
     @staticmethod
-    def robust_click_element(element):
+    def robust_click(element):
         pass
 
     @staticmethod
