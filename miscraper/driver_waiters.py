@@ -46,6 +46,12 @@ class NameWaiter(AbstractElementsWaiter):
         return By.NAME
     
 
+class XPathWaiter(AbstractElementsWaiter):
+    @property
+    def by_type(self):
+        return By.XPATH
+    
+
 class CSSSelectorWaiter(AbstractElementsWaiter):
     @property
     def by_type(self):
@@ -65,7 +71,8 @@ class WaiterFactory:
             'id': IDWaiter,
             'class': ClassNameWaiter,
             'css': CSSSelectorWaiter,
-            'name': NameWaiter
+            'name': NameWaiter,
+            'xpath': XPathWaiter
         }
 
     def get_object(self, selector):

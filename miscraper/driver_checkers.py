@@ -43,6 +43,11 @@ class NamePresenceChecker(AbstractElementsPresenceChecker):
     def by_type(self):
         return By.NAME
     
+class XPathPresenceChecker(AbstractElementsPresenceChecker):
+    @property
+    def by_type(self):
+        return By.XPATH
+    
 
 class CSSSelectorPresenceChecker(AbstractElementsPresenceChecker):
     @property
@@ -63,7 +68,8 @@ class PresenceCheckerFactory:
             'id': IDPresenceChecker,
             'class': ClassNamePresenceChecker,
             'css': CSSSelectorPresenceChecker,
-            'name': NamePresenceChecker
+            'name': NamePresenceChecker,
+            'xpath': XPathPresenceChecker
         }
 
     def get_object(self, selector):

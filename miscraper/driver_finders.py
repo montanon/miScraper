@@ -82,6 +82,12 @@ class NameFinder(AbstractElementsFinder):
     @property
     def by_type(self):
         return By.NAME
+    
+
+class XPathFinder(AbstractElementsFinder):
+    @property
+    def by_type(self):
+        return By.XPATH
 
 
 class CSSSelectorFinder(AbstractElementsFinder):
@@ -115,7 +121,8 @@ class FinderFactory:
             'id': IDFinder,
             'class': ClassNameFinder,
             'css': CSSSelectorFinder,
-            'name': NameFinder
+            'name': NameFinder,
+            'xpath': XPathFinder
         }
 
     def get_object(self, selector):
