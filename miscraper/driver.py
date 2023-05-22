@@ -1,3 +1,5 @@
+import os
+
 from seleniumrequests import Chrome
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
@@ -8,7 +10,8 @@ from .driver_checkers import *
 
 
 CHROME_DRIVER = '~/WebBrowser_Drivers/chromedriver'
-DOWNLOADS_DIRECTORY = '~/Downloads'
+DOWNLOADS_DIRECTORY = os.path.expanduser('~/Downloads')
+
 
 
 class DriverHandler:
