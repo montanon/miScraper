@@ -50,7 +50,7 @@ class DriverHandler:
                 "plugins.always_open_pdf_externally": True
             }
 
-            if self.kwargs and any(prefs.keys() in self.kwargs.keys()):
+            if self.kwargs and any([k in self.kwargs.keys() for k in prefs.keys()]):
                 for key in prefs.keys():
                     if key in self.kwargs.keys():
                         prefs[key] = self.kwargs[key]
