@@ -1,5 +1,6 @@
 from seleniumrequests import Chrome
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 
 from .driver_finders import *
 from .driver_waiters import *
@@ -112,6 +113,36 @@ class DriverHandler:
     @staticmethod
     def input_to_element(element, text):
         element.send_keys(text)
+
+    @staticmethod
+    def select_element_index(element, index):
+        selector = Select(element)
+        selector.select_by_index(index)
+
+    @staticmethod
+    def select_element_value(element, value):
+        selector = Select(element)
+        selector.select_by_value(value)
+
+    @staticmethod
+    def select_element_text(element, text):
+        selector = Select(element)
+        selector.select_by_visible_text(text)
+
+    @staticmethod
+    def get_element_selected_options(element):
+        selector = Select(element)
+        return selector.all_selected_options
+        
+    @staticmethod
+    def get_all_element_options(element):
+        selector = Select(element)
+        return selector.options
+    
+    @staticmethod
+    def deselect_element_options(element):
+        selector = Select(element)
+        selector.deselect_all()
 
 
 def main():
