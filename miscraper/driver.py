@@ -13,7 +13,9 @@ DOWNLOADS_DIRECTORY = '~/Downloads'
 
 class DriverHandler:
 
-    def __init__(self, use_options=False, headless=False):
+    def __init__(self, use_options=False, headless=False, **kwargs):
+
+        self.kwargs = kwargs if kwargs else None
 
         self.driver_options = self.configure_driver_options(use_options)
 
@@ -47,6 +49,11 @@ class DriverHandler:
                 "plugins.plugins_disabled": "Chrome PDF Viewer",
                 "plugins.always_open_pdf_externally": True
             }
+
+            if self.kwargs and any(prefs.keys() in self.kwargs.keys()):
+                for key in prefs.keys():
+                    if key in self.kwargs.keys():
+                        prefs[key] = self.kwargs[key]
 
             options.add_experimental_option("prefs", prefs)
 
