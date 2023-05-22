@@ -13,9 +13,17 @@ DOWNLOADS_DIRECTORY = '~/Downloads'
 
 class DriverHandler:
 
-    def __init__(self, use_options=False, headless=False, **kwargs):
+    def __init__(self, use_options=False, headless=False, options_prefs=None):
 
-        self.kwargs = kwargs if kwargs else None
+        self.prefs = {
+                "download.default_directory": DOWNLOADS_DIRECTORY,
+                "download.prompt_for_download": False,
+                "download.directory_upgrade": True,
+                "plugins.plugins_disabled": "Chrome PDF Viewer",
+                "plugins.always_open_pdf_externally": True
+            }
+        if options_prefs:
+            self.prefs.update(options_prefs)
 
         self.driver_options = self.configure_driver_options(use_options)
 
@@ -37,25 +45,9 @@ class DriverHandler:
         return driver
 
     def configure_driver_options(self, use_options=False):
-
         options = webdriver.ChromeOptions()
-
         if use_options:
-
-            prefs = {
-                "download.default_directory": DOWNLOADS_DIRECTORY,
-                "download.prompt_for_download": False,
-                "download.directory_upgrade": True,
-                "plugins.plugins_disabled": "Chrome PDF Viewer",
-                "plugins.always_open_pdf_externally": True
-            }
-
-            if self.kwargs and any([k in self.kwargs.keys() for k in prefs.keys()]):
-                for key in prefs.keys():
-                    if key in self.kwargs.keys():
-                        prefs[key] = self.kwargs[key]
-
-            options.add_experimental_option("prefs", prefs)
+            options.add_experimental_option("prefs", self.prefs)
 
         return options
 
